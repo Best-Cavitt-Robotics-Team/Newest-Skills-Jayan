@@ -6,7 +6,8 @@ void opcontrol() {
   while (true) {
     // Get input from controller
     double lefty_analog = master.get_analog(ANALOG_LEFT_Y);
-    double rightx_analog = master.get_analog(ANALOG_RIGHT_X);
+    double rightx_analog = master.get_analog(
+      ANALOG_RIGHT_X);
 
     // Convert analog input into quadratic / cubic drive depending on exponent
     prep_input(lefty_analog, 3);
@@ -47,12 +48,11 @@ void opcontrol() {
 
     // scraper
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-      scraper1.set_value(true);
-      scraper2.set_value(true);
+      descore.set_value(true);
+      
     }
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
-      scraper1.set_value(false);
-      scraper2.set_value(false);
+      descore.set_value(false);
     }
 
     // flap
@@ -64,7 +64,14 @@ void opcontrol() {
       scraper1.set_value(false);
       scraper2.set_value(false);
     }
-
+     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+      ballblock.set_value(false);
+      
+    }
+    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+      ballblock.set_value(true);
+      
+    }
     // delay
     pros::delay(10);
   }
