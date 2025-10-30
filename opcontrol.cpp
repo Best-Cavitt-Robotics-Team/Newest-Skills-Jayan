@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/abstract_motor.hpp"
 #define DRIVE_SCALE 1.27
 #include "globals.h"
 pros::Controller master(pros::E_CONTROLLER_MASTER);
@@ -37,9 +38,9 @@ void opcontrol() {
       intake_middle.move_velocity(200);
       intake_top.move_velocity(-200);
     } else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-      intake_bottom.move_velocity(600);
-      intake_middle.move_velocity(-200);
-      intake_top.move_velocity(-200);
+      intake_bottom.move_velocity(-600);
+      intake_middle.move_velocity(200);
+      intake_top.set_brake_mode(MotorBrake::hold);
     } else {
       intake_bottom.move_velocity(0);
       intake_middle.move_velocity(0);
